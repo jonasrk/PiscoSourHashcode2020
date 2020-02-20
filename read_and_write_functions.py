@@ -12,17 +12,17 @@ def read_input_file(file_name):
     print(file_name)
     with open(file_name, "r") as fin:
         line = fin.readline()
-        n_books, n_libs, n_days = [int(num) for num in line.split(" ")]
+        n_books, n_libs, n_days = [int(num) for num in line.split()]
         line = fin.readline()
 
-        scores = [int(num) for num in line.split(" ")]
+        scores = [int(num) for num in line.split()]
 
         libs = []
         for i in range(n_libs):
             line = fin.readline()
-            li_nbooks, lui_signup, li_max = [int(num) for num in line.split(" ")]
-            line = fin.readline().split()
-            li_books = [int(num) for num in line.split(" ")]
+            li_nbooks, lui_signup, li_max = [int(num) for num in line.split()]
+            line = fin.readline()
+            li_books = [int(num) for num in line.split()]
 
             libs.append((li_nbooks, lui_signup, li_max, li_books))
     return n_books, n_libs, n_days, scores, libs
@@ -40,6 +40,21 @@ def write_file(output_file, pizzas_to_order):
     print("file: " + output_file + " was saved")
 
 
+def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
+    big_solution_string = ""
+
+    big_solution_string += f"{n_libs}\n"
+
+    for i in range(n_libs):
+        big_solution_string += f"{i} {libs[i][0]}\n"
+        book_list_string = ""
+        for book in libs[i][3]:
+            book_list_string += str(book) + " "
+        big_solution_string += f"{book_list_string}\n"
+
+    print(big_solution_string)
+
+
 def main():
 
     # Read the input file
@@ -51,8 +66,11 @@ def main():
     # file_name = "e_also_big.in"
 
     n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
-    print(n_books, n_libs, n_days, scores, libs)
+
+    create_dummy_solution(n_books, n_libs, n_days, scores, libs)
+
     return
+
 
 def xx():
     # Write output
