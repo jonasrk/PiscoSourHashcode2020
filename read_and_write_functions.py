@@ -100,7 +100,9 @@ def lib_quality_score(lib):
     #     min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
     #     * average_books_score
     # )
-    return max_sending_days
+    #    return (max_sending_days, min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
+    #            * average_books_score)
+    return (max_sending_days, max_send_per_day)
 
 
 def main():
@@ -108,8 +110,8 @@ def main():
     # Read the input file
     input_path = "./input_files/"
     output_path = "./output_files/"
-    # file_name = "a_example.txt"
-    file_name = "b_read_on.txt"
+    file_name = "a_example.txt"
+    # file_name = "b_read_on.txt"
     # file_name = "c_incunabula.txt"
     # file_name = "d_tough_choices.txt"
     # file_name = "e_so_many_books.txt"
