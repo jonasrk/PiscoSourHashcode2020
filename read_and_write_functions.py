@@ -28,53 +28,58 @@ def read_input_file(file_name):
     return n_books, n_libs, n_days, scores, libs
 
 
-def write_file(output_file, pizzas_to_order):
+def write_file(output_file, sln):
     """
     write the output file for the passed pizza
     """
     with open(output_file, "w") as fout:
         # number of pizzas
-        fout.write("%d\n" % len(pizzas_to_order))
-        for s in pizzas_to_order:
-            fout.write(str(s) + " ")
+        fout.write(sln)
     print("file: " + output_file + " was saved")
 
 
 def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
     big_solution_string = ""
 
-    big_solution_string += f"{n_libs}\n"
+    big_solution_string += str(n_libs) + "\n"
 
     for i in range(n_libs):
-        big_solution_string += f"{i} {libs[i][0]}\n"
+        big_solution_string += str(i) + " " + str(libs[i][0]) + "\n"
         book_list_string = ""
-        for book in libs[i][3]:
+        for book in libs[i][3][:-1]:
             book_list_string += str(book) + " "
-        big_solution_string += f"{book_list_string}\n"
+        book_list_string += str(libs[i][3][-1])
+        big_solution_string += book_list_string + "\n"
 
-    print(big_solution_string)
+
+    return big_solution_string
 
 
 def main():
 
     # Read the input file
     input_path = "./input_files/"
+    output_path = "./output_files/"
     file_name = "a_example.txt"
-    # file_name = "b_small.in"
-    # file_name = "c_medium.in"
-    # file_name = "d_quite_big.in"
-    # file_name = "e_also_big.in"
+    file_name = "b_read_on.txt"
+    file_name = "c_medium.txt"
+    file_name = "d_quite_big.txt"
+    file_name = "e_also_big.txt"
+    file_name = "f_libraries_of_the_world.txt"
 
     n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
 
-    create_dummy_solution(n_books, n_libs, n_days, scores, libs)
+    sln = create_dummy_solution(n_books, n_libs, n_days, scores, libs)
+
+    output_file = output_path + file_name
+    write_file(output_file, sln)
 
     return
 
 
 def xx():
     # Write output
-    output_file = "../results/output_" + file_name
+
     write_file(output_file, pizzas_to_order)
 
 
