@@ -62,23 +62,22 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
         books_li = set(libs[i][3])
 
         books_to_send = books_li.difference(sent_books)
-
         books_to_send = list(books_to_send)
         books_to_send = books_to_send[:max_books_to_send]
-
         books_to_send = set(books_to_send)
 
         sent_books = sent_books.union(books_to_send)
 
-        if len(books_to_send) == 0:
-            continue
+        # if len(books_to_send) == 0:
+        #     continue
 
         current_day += libs[i][1]
         big_solution_string += str(libs[i][4]) + " "
-        big_solution_string += str(len(books_to_send)) + "\n"
+        # big_solution_string += str(len(books_to_send)) + "\n"
+        big_solution_string += str(len(libs[i][3])) + "\n"
         book_list_string = ""
 
-        for book in books_to_send:
+        for book in libs[i][3]:  # books_to_send:
             book_list_string += str(book) + " "
 
         book_list_string = book_list_string[:-1]
@@ -111,7 +110,7 @@ def main():
     input_path = "./input_files/"
     output_path = "./output_files/"
     file_name = "a_example.txt"
-    # file_name = "b_read_on.txt"
+    file_name = "b_read_on.txt"
     # file_name = "c_incunabula.txt"
     # file_name = "d_tough_choices.txt"
     # file_name = "e_so_many_books.txt"
