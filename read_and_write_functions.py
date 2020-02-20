@@ -51,8 +51,12 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
         book_list_string += str(libs[i][3][-1])
         big_solution_string += book_list_string + "\n"
 
-
     return big_solution_string
+
+
+def sort_libs(libs, n_days, scores):
+    
+
 
 
 def main():
@@ -61,11 +65,11 @@ def main():
     input_path = "./input_files/"
     output_path = "./output_files/"
     file_name = "a_example.txt"
-    file_name = "b_read_on.txt"
-    file_name = "c_medium.txt"
-    file_name = "d_quite_big.txt"
-    file_name = "e_also_big.txt"
-    file_name = "f_libraries_of_the_world.txt"
+    # file_name = "b_read_on.txt"
+    # file_name = "c_incunabula.txt"
+    # file_name = "d_tough_choices.txt"
+    file_name = "e_so_many_books.txt"
+    # file_name = "f_libraries_of_the_world.txt"
 
     n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
 
