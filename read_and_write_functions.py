@@ -51,17 +51,44 @@ def write_file(output_file, sln):
 def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
     big_solution_string = ""
 
-    big_solution_string += str(n_libs) + "\n"
-
+    sent_books = set([])
+    nlib = 0
+    current_day = 0
     for i in range(n_libs):
-        big_solution_string += str(libs[i][4]) + " " + str(libs[i][0]) + "\n"
-        book_list_string = ""
-        for book in libs[i][3][:-1]:
-            book_list_string += str(book) + " "
-        book_list_string += str(libs[i][3][-1])
-        big_solution_string += book_list_string + "\n"
+        days_left = n_days - current_day - libs[i][1]
+        max_books_to_send = min(days_left * libs[i][2], libs[i][0])
+        
+        books_li = set(libs[i][3])
 
-    return big_solution_string
+        books_to_send = books_li.difference(sent_books)
+        
+        books_to_send = list(books_to_send)
+        books_to_send = books_to_send[:max_books_to_send]
+
+        books_to_send = set(books_to_send)
+        
+
+        sent_books = sent_books.union(books_to_send)
+
+        if len(books_to_send) == 0:
+            continue
+
+        current_day += libs[i][1]
+        big_solution_string += str(libs[i][4]) + " "
+        big_solution_string += str(len(books_to_send)) + "\n"
+        book_list_string = ""
+        
+        for book in books_to_send:
+            book_list_string += str(book) + " "
+
+        book_list_string = book_list_string[:-1]
+        big_solution_string += book_list_string + "\n"
+        nlib += 1
+
+    new_solution = ""
+    new_solution += str(nlib) + "\n" + big_solution_string
+    
+    return new_solution
 
 
 def lib_quality_score(lib):
