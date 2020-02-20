@@ -68,7 +68,11 @@ def lib_quality_score(lib):
     max_sending_days = n_days - lib[1]
     no_of_books_in_the_lib = lib[0]
     max_send_per_day = lib[2]
-    return min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
+    average_books_score = lib[5]
+    return (
+        min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
+        * average_books_score
+    )
 
 
 def main():
@@ -83,9 +87,9 @@ def main():
     file_name = "e_so_many_books.txt"
     file_name = "f_libraries_of_the_world.txt"
 
+    global n_days, scores
     n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
 
-    global n_days, scores
     sorted_libs = sorted(libs, reverse=True, key=lib_quality_score)
     #    print(sorted_libs)
 
