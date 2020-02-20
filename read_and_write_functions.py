@@ -9,14 +9,23 @@ def read_input_file(file_name):
     Reads the input file and returns m, n and sizes
     """
 
+    print(file_name)
     with open(file_name, "r") as fin:
         line = fin.readline()
-        m, n = [int(num) for num in line.split()]
-        line = fin.readline().split()
-        sizes = np.empty(n)
-        for i in range(n):
-            sizes[i] = int(line[i])
-    return m, n, sizes
+        n_books, n_libs, n_days = [int(num) for num in line.split(" ")]
+        line = fin.readline()
+
+        scores = [int(num) for num in line.split(" ")]
+
+        libs = []
+        for i in range(n_libs):
+            line = fin.readline()
+            li_nbooks, lui_signup, li_max = [int(num) for num in line.split(" ")]
+            line = fin.readline().split()
+            li_books = [int(num) for num in line.split(" ")]
+
+            libs.append((li_nbooks, lui_signup, li_max, li_books))
+    return n_books, n_libs, n_days, scores, libs
 
 
 def write_file(output_file, pizzas_to_order):
@@ -34,31 +43,18 @@ def write_file(output_file, pizzas_to_order):
 def main():
 
     # Read the input file
-    input_path = "../input_data/"
-    # file_name = "a_example.in"
+    input_path = "./input_files/"
+    file_name = "a_example.txt"
     # file_name = "b_small.in"
     # file_name = "c_medium.in"
     # file_name = "d_quite_big.in"
-    file_name = "e_also_big.in"
+    # file_name = "e_also_big.in"
 
-    [m, n, sizes] = read_input_file(input_path + file_name)
-    ids_of_pizzas = np.arange(n)
-    print("Maximum number of pizza slices to order:", m)
-    print("Number of dierent types of pizza:", n)
+    n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
+    print(n_books, n_libs, n_days, scores, libs)
+    return
 
-    # Trivial solution 1: add pizzas in order until limit is reached
-    nb_of_slices = 0
-    pizzas_to_order = []
-    total_slices = 0
-    for i in range(n):
-        if total_slices + sizes[i] < m:
-            pizzas_to_order.append(i)
-            total_slices += sizes[i]
-        else:
-            print("limit reached")
-            break
-    print("Total slices", total_slices)
-
+def xx():
     # Write output
     output_file = "../results/output_" + file_name
     write_file(output_file, pizzas_to_order)
