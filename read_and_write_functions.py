@@ -1,7 +1,8 @@
 "read and write functions"
 
 import sys
-import numpy as np
+
+# import numpy as np
 
 
 def read_input_file(file_name):
@@ -57,16 +58,15 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
     for i in range(n_libs):
         days_left = n_days - current_day - libs[i][1]
         max_books_to_send = min(days_left * libs[i][2], libs[i][0])
-        
+
         books_li = set(libs[i][3])
 
         books_to_send = books_li.difference(sent_books)
-        
+
         books_to_send = list(books_to_send)
         books_to_send = books_to_send[:max_books_to_send]
 
         books_to_send = set(books_to_send)
-        
 
         sent_books = sent_books.union(books_to_send)
 
@@ -77,7 +77,7 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
         big_solution_string += str(libs[i][4]) + " "
         big_solution_string += str(len(books_to_send)) + "\n"
         book_list_string = ""
-        
+
         for book in books_to_send:
             book_list_string += str(book) + " "
 
@@ -87,7 +87,7 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
 
     new_solution = ""
     new_solution += str(nlib) + "\n" + big_solution_string
-    
+
     return new_solution
 
 
@@ -96,10 +96,11 @@ def lib_quality_score(lib):
     no_of_books_in_the_lib = lib[0]
     max_send_per_day = lib[2]
     average_books_score = lib[5]
-    return (
-        min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
-        * average_books_score
-    )
+    # return (
+    #     min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
+    #     * average_books_score
+    # )
+    return max_sending_days
 
 
 def main():
@@ -107,12 +108,12 @@ def main():
     # Read the input file
     input_path = "./input_files/"
     output_path = "./output_files/"
-    file_name = "a_example.txt"
+    # file_name = "a_example.txt"
     file_name = "b_read_on.txt"
-    file_name = "c_incunabula.txt"
-    file_name = "d_tough_choices.txt"
-    file_name = "e_so_many_books.txt"
-    file_name = "f_libraries_of_the_world.txt"
+    # file_name = "c_incunabula.txt"
+    # file_name = "d_tough_choices.txt"
+    # file_name = "e_so_many_books.txt"
+    # file_name = "f_libraries_of_the_world.txt"
 
     global n_days, scores
     n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
