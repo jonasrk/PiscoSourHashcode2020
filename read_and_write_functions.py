@@ -1,6 +1,7 @@
 "read and write functions"
 
 import sys
+import numpy as np
 
 
 def read_input_file(file_name):
@@ -15,7 +16,7 @@ def read_input_file(file_name):
         sizes = np.empty(n)
         for i in range(n):
             sizes[i] = int(line[i])
-    return [m, n, sizes]
+    return m, n, sizes
 
 
 def write_file(output_file, pizzas_to_order):
@@ -29,3 +30,14 @@ def write_file(output_file, pizzas_to_order):
             fout.write(str(s) + " ")
     print("file: " + output_file + " was saved")
 
+
+def main():
+    data = read_input_file("./input_files/a_example.in")
+
+    print(data)
+
+    write_file("./output_files/a_example.out", [1, 1])
+
+
+if __name__ == "__main__":
+  main()
