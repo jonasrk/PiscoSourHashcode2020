@@ -27,11 +27,12 @@ def read_input_file(file_name):
             def bookscore(bi):
                 return scores[bi]
 
-            li_books = sorted(li_books, reverse = True, key = bookscore)
-            
+            li_books = sorted(li_books, reverse=True, key=bookscore)
+
             li_bookscore = 0
             for bi in li_books:
                 li_bookscore += scores[bi]
+            li_bookscore = li_bookscore / li_nbooks
 
             libs.append((li_nbooks, lui_signup, li_max, li_books, i, li_bookscore))
     return n_books, n_libs, n_days, scores, libs
@@ -63,11 +64,11 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
     return big_solution_string
 
 
-def sort_lib(lib):
+def lib_quality_score(lib):
     max_sending_days = n_days - lib[1]
-    return - max(lib[0],lib[2]*max_sending_days)
-    
-
+    no_of_books_in_the_lib = lib[0]
+    max_send_per_day = lib[2]
+    return min(no_of_books_in_the_lib, max_send_per_day * max_sending_days)
 
 
 def main():
@@ -85,8 +86,8 @@ def main():
     n_books, n_libs, n_days, scores, libs = read_input_file(input_path + file_name)
 
     global n_days, scores
-    sorted_libs = sorted(libs, key=sort_lib)
-#    print(sorted_libs)
+    sorted_libs = sorted(libs, reverse=True, key=lib_quality_score)
+    #    print(sorted_libs)
 
     sln = create_dummy_solution(n_books, n_libs, n_days, scores, sorted_libs)
 
