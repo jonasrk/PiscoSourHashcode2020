@@ -32,12 +32,38 @@ def write_file(output_file, pizzas_to_order):
 
 
 def main():
-    data = read_input_file("./input_files/a_example.in")
 
-    print(data)
+    # Read the input file
+    input_path = "../input_data/"
+    # file_name = "a_example.in"
+    # file_name = "b_small.in"
+    # file_name = "c_medium.in"
+    # file_name = "d_quite_big.in"
+    file_name = "e_also_big.in"
 
-    write_file("./output_files/a_example.out", [1, 1])
+    [m, n, sizes] = read_input_file(input_path + file_name)
+    ids_of_pizzas = np.arange(n)
+    print("Maximum number of pizza slices to order:", m)
+    print("Number of dierent types of pizza:", n)
+
+    # Trivial solution 1: add pizzas in order until limit is reached
+    nb_of_slices = 0
+    pizzas_to_order = []
+    total_slices = 0
+    for i in range(n):
+        if total_slices + sizes[i] < m:
+            pizzas_to_order.append(i)
+            total_slices += sizes[i]
+        else:
+            print("limit reached")
+            break
+    print("Total slices", total_slices)
+
+    # Write output
+    output_file = "../results/output_" + file_name
+    write_file(output_file, pizzas_to_order)
 
 
 if __name__ == "__main__":
-  main()
+    main()
+
