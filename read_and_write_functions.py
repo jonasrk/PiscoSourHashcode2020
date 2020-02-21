@@ -65,8 +65,8 @@ def create_dummy_solution(n_books, n_libs, n_days, scores, libs):
         books_to_send = list(books_to_send)
         books_to_send = books_to_send[:max_books_to_send]
         books_to_send = set(books_to_send)
-
-        sent_books = sent_books.union(books_to_send)
+s_to_send)
+        sent_books = sent_books.union(book
 
         # if len(books_to_send) == 0:
         #     continue
